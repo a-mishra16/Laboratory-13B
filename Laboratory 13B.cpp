@@ -9,6 +9,7 @@
 */
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -197,6 +198,34 @@ int main()
 				}
 			}
 			cout << endl;
+		}
+		string datafile;
+		cout << "Output file: ";
+		cin >> datafile;
+		ofstream file(datafile);
+		if (!file)
+		{
+			cout << "Unable to open or create file.";
+			return 1;
+		}
+		file << monthName << " " << year << endl;
+		file << "Sa Fr Th We Tu Mo Su" << endl;
+		cDay = 1;
+		for (int i = 0; i < 6; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (i == 0 && j < firstDay - 1)
+				{ // If it's the first week and we're before the first day of the month
+					file << "   "; // Print empty space
+				}
+				else if (cDay <= days)
+				{
+					file << setw(2) << cDay << " ";
+					cDay++;
+				}
+			}
+			file << endl;
 		}
 
 	}
