@@ -44,6 +44,13 @@ int main()
 	int year;
 	string dOW;
 	string monthName;
+
+	string calendar[6] = { "                   1  2  3  4  5  6  7 ",
+						   " 2  3  4  5  6  7  8  9 10 11 12 13 14 ",
+						   " 9 10 11 12 13 14 15 16 17 18 19 20 21 ",
+						   "16 17 18 19 20 21 22 23 24 25 26 27 28 ",
+						   "23 24 25 26 27 28 29 30 31             ",
+						   "30 31                                  " };
 	/*while (!done) //Leap Year Loop
 	{
 		cout << "Please enter a year or Q to quit: ";
@@ -79,13 +86,13 @@ int main()
 			done = true;
 			break;
 		}
-		
+
 		switch (month)
 		{
 		case 1: monthName = "January"; break;
 		case 2: monthName = "February"; break;
 		case 3: monthName = "March"; break;
-		case 4: monthName = "April"; break; 
+		case 4: monthName = "April"; break;
 		case 5: monthName = "May"; break;
 		case 6: monthName = "June"; break;
 		case 7: monthName = "July"; break;
@@ -98,7 +105,7 @@ int main()
 
 		cout << monthName << " " << year << " has " << daysInMonth(month, year) << " days." << endl;
 	}
-	*/
+	*//*
 	while (!done)
 	{
 		cout << "Please enter a date or Q to quit: ";
@@ -137,12 +144,63 @@ int main()
 		case 12: monthName = "December"; break;
 		}
 
-		
+
 
 		cout << dOW << ", " << monthName << ", " << year << endl;
+	}*/
+	while (!done)
+	{
+		cout << "Please enter a month and year or Q to quit: ";
+		cin >> month >> year;
+
+		int firstDay = dayOfWeek(month, 1, year);
+		int days = daysInMonth(month, year);
+		int cDay = 1;
+
+		if (cin.fail())
+		{
+			done = true;
+			break;
+		}
+
+		switch (month)
+		{
+		case 1: monthName = "January"; break;
+		case 2: monthName = "February"; break;
+		case 3: monthName = "March"; break;
+		case 4: monthName = "April"; break;
+		case 5: monthName = "May"; break;
+		case 6: monthName = "June"; break;
+		case 7: monthName = "July"; break;
+		case 8: monthName = "August"; break;
+		case 9: monthName = "September"; break;
+		case 10: monthName = "October"; break;
+		case 11: monthName = "November"; break;
+		case 12: monthName = "December"; break;
+		}
+
+		cout << endl << monthName << " " << year << endl;
+		cout << "Sa Fr Th We Tu Mo Su" << endl;
+		for (int i = 0; i < 6; i++) 
+		{
+			for (int j = 0; j < 7; j++) 
+			{
+				if (i == 0 && j < firstDay - 1) 
+				{// If it's the first week and we're before the first day of the month
+					cout << "   "; // Print empty space
+				}
+				else if (cDay <= days) 
+				{ // If we're within the valid range of days for the month
+					cout << cDay << " ";
+					cDay++;
+				}
+			}
+			cout << endl;
+		}
+
 	}
-	
 }
+
 
 bool isLeapYear(int year)
 {
