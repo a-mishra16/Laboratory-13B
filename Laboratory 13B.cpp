@@ -8,6 +8,7 @@
 * page of a given month of a given year. 
 */
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -153,15 +154,15 @@ int main()
 		cout << "Please enter a month and year or Q to quit: ";
 		cin >> month >> year;
 
-		int firstDay = dayOfWeek(month, 1, year);
-		int days = daysInMonth(month, year);
-		int cDay = 1;
-
 		if (cin.fail())
 		{
 			done = true;
 			break;
 		}
+
+		int firstDay = dayOfWeek(month, 1, year);
+		int days = daysInMonth(month, year);
+		int cDay = 1;
 
 		switch (month)
 		{
@@ -179,8 +180,8 @@ int main()
 		case 12: monthName = "December"; break;
 		}
 
-		cout << endl << monthName << " " << year << endl;
-		cout << "Sa Fr Th We Tu Mo Su" << endl;
+		cout << "\n" << monthName << " " << year << endl;
+		cout << "Su Mo Tu We Th Fr Sa" << endl;
 		for (int i = 0; i < 6; i++) 
 		{
 			for (int j = 0; j < 7; j++) 
@@ -191,7 +192,7 @@ int main()
 				}
 				else if (cDay <= days) 
 				{ // If we're within the valid range of days for the month
-					cout << cDay << " ";
+					cout << setw(2) << cDay << " ";
 					cDay++;
 				}
 			}
