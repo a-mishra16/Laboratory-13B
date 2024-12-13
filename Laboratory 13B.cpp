@@ -27,11 +27,23 @@ daysInMonth – determines the number of days in a specified month
 @return either 28, 29, 30, or 31, based on month and (leap) year
 */
 
+int dayOfWeek(int month, int day, int year);
+/**
+dayOfWeek - Computes the weekday of a given date.
+@param year the year
+@param month the month (1 = January ... 12 = December)
+@param day the day of the month
+@return the weekday (0 = Saturday ... 6 = Friday)
+*/
+
 int main()
 {
 	bool done = false;
+	int day;
 	int month;
 	int year;
+	string dOW;
+	string monthName;
 	/*while (!done) //Leap Year Loop
 	{
 		cout << "Please enter a year or Q to quit: ";
@@ -56,7 +68,7 @@ int main()
 		}
 
 	}
-	*/
+	*//*
 	while (!done)
 	{
 		cout << "Please enter a month and a year or Q to quit: ";
@@ -67,7 +79,7 @@ int main()
 			done = true;
 			break;
 		}
-		string monthName;
+		
 		switch (month)
 		{
 		case 1: monthName = "January"; break;
@@ -86,6 +98,50 @@ int main()
 
 		cout << monthName << " " << year << " has " << daysInMonth(month, year) << " days." << endl;
 	}
+	*/
+	while (!done)
+	{
+		cout << "Please enter a date or Q to quit: ";
+		cin >> month >> day >> year;
+		int weekDay = dayOfWeek(month, day, year);
+		if (cin.fail())
+		{
+			done = true;
+			break;
+		}
+
+		switch (weekDay)
+		{
+		case 0: dOW = "Saturday"; break;
+		case 1: dOW = "Sunday"; break;
+		case 2: dOW = "Monday"; break;
+		case 3: dOW = "Tuesday"; break;
+		case 4: dOW = "Wednesday"; break;
+		case 5: dOW = "Thursday"; break;
+		case 6: dOW = "Friday"; break;
+		}
+
+		switch (month)
+		{
+		case 1: monthName = "January"; break;
+		case 2: monthName = "February"; break;
+		case 3: monthName = "March"; break;
+		case 4: monthName = "April"; break;
+		case 5: monthName = "May"; break;
+		case 6: monthName = "June"; break;
+		case 7: monthName = "July"; break;
+		case 8: monthName = "August"; break;
+		case 9: monthName = "September"; break;
+		case 10: monthName = "October"; break;
+		case 11: monthName = "November"; break;
+		case 12: monthName = "December"; break;
+		}
+
+		
+
+		cout << dOW << ", " << monthName << ", " << year << endl;
+	}
+	
 }
 
 bool isLeapYear(int year)
@@ -128,4 +184,17 @@ int daysInMonth(int month, int year)
 	case 11: return 30; break;
 	case 12: return 31; break;
 	}
+}
+
+int dayOfWeek(int month, int day, int year)
+{
+	int weekDay;
+	if (month == 1 || month == 2)
+	{
+		year--;
+		month += 12;
+	}
+	weekDay = (day + (((month + 1) * 26) / 10) + year + (year / 4) + 6 * (year / 100) + (year / 400)) % 7;
+	
+	return weekDay;
 }
