@@ -178,7 +178,7 @@ int main()
 		case 10: monthName = "October"; break;
 		case 11: monthName = "November"; break;
 		case 12: monthName = "December"; break;
-		}
+		} 
 
 		cout << "\n" << monthName << " " << year << endl;
 		cout << "Su Mo Tu We Th Fr Sa" << endl;
